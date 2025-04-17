@@ -1,1 +1,864 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقعي الإلكتروني الحديث</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --danger-color: #e74c3c;
+            --success-color: #27ae60;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--dark-color);
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        /* الشريط العلوي */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* القسم الرئيسي */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://via.placeholder.com/1920x1080');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 5%;
+            margin-top: 70px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            margin-right: 1rem;
+        }
+        
+        /* الأقسام */
+        .section {
+            padding: 5rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            color: #777;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* الخدمات */
+        .services {
+            background-color: white;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-icon {
+            background-color: var(--light-color);
+            padding: 2rem;
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+        
+        .service-content {
+            padding: 2rem;
+        }
+        
+        .service-content h3 {
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+        
+        /* المشاريع */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 250px;
+        }
+        
+        .portfolio-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(52, 152, 219, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .portfolio-item:hover .portfolio-img {
+            transform: scale(1.1);
+        }
+        
+        /* الفريق */
+        .team {
+            background-color: var(--light-color);
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .team-member {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+        
+        .team-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        
+        .team-info {
+            padding: 1.5rem;
+        }
+        
+        .team-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+        
+        .team-info p {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: var(--light-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* الاتصال */
+        .contact {
+            background-color: white;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+        }
+        
+        .contact-details {
+            margin-bottom: 2rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-icon {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-left: 1rem;
+            margin-top: 0.3rem;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        /* التذييل */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: right;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+        
+        /* التجاوب */
+        @media (max-width: 992px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                transition: right 0.3s;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .section {
+                padding: 3rem 5%;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 1.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .navbar {
+                padding: 1rem;
+            }
+            
+            .hero {
+                margin-top: 60px;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn-outline {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+            
+            .btn-group {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الشريط العلوي -->
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">موقع<span>ي</span></a>
+            
+            <ul class="nav-links">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#services">الخدمات</a></li>
+                <li><a href="#portfolio">المشاريع</a></li>
+                <li><a href="#team">الفريق</a></li>
+                <li><a href="#contact">اتصل بنا</a></li>
+            </ul>
+            
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
 
+    <!-- القسم الرئيسي -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>نقدم حلولاً رقمية مبدعة</h1>
+            <p>نحن نقدم خدمات متكاملة في تصميم وتطوير المواقع الإلكترونية والتسويق الرقمي لمساعدة عملك على النمو في العالم الرقمي.</p>
+            <div class="btn-group">
+                <a href="#contact" class="btn btn-outline">اتصل بنا</a>
+                <a href="#services" class="btn">استكشف الخدمات</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الخدمات -->
+    <section class="section services" id="services">
+        <div class="section-title">
+            <h2>خدماتنا</h2>
+            <p>نقدم مجموعة واسعة من الخدمات الرقمية المصممة خصيصًا لتلبية احتياجات عملك</p>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <div class="service-content">
+                    <h3>تطوير الويب</h3>
+                    <p>تصميم وتطوير مواقع إلكترونية متجاوبة وسريعة باستخدام أحدث التقنيات لضمان تجربة مستخدم ممتازة.</p>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div class="service-content">
+                    <h3>تطبيقات الجوال</h3>
+                    <p>بناء تطبيقات جوال عالية الجودة لنظامي iOS و Android لتعزيز حضورك الرقمي وزيادة تفاعل العملاء.</p>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <div class="service-content">
+                    <h3>التسويق الرقمي</h3>
+                    <p>استراتيجيات تسويقية شاملة تشمل تحسين محركات البحث (SEO) وإعلانات وسائل التواصل الاجتماعي والتسويق بالمحتوى.</p>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-paint-brush"></i>
+                </div>
+                <div class="service-content">
+                    <h3>تصميم جرافيك</h3>
+                    <p>تصميمات إبداعية للهوية البصرية لعلامتك التجارية تشمل الشعارات والبروشورات ومواد التسويق.</p>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="service-content">
+                    <h3>تحليل البيانات</h3>
+                    <p>تحليل بيانات عملك لتقديم رؤى قابلة للتنفيذ تساعد في اتخاذ قرارات استراتيجية مدروسة.</p>
+                </div>
+            </div>
+            
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-cloud"></i>
+                </div>
+                <div class="service-content">
+                    <h3>الحلول السحابية</h3>
+                    <p>توفير حلول سحابية آمنة وقابلة للتطوير لتحسين كفاءة عملك وتقليل التكاليف التشغيلية.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المشاريع -->
+    <section class="section" id="portfolio">
+        <div class="section-title">
+            <h2>أعمالنا</h2>
+            <p>استكشف مجموعة من مشاريعنا الأخيرة التي نفخر بها</p>
+        </div>
+        
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <img src="https://via.placeholder.com/600x400" alt="مشروع 1" class="portfolio-img">
+                <div class="portfolio-overlay">
+                    <h3>موقع تجارة إلكترونية</h3>
+                    <p>تصميم وتطوير متجر إلكتروني متكامل</p>
+                    <a href="#" class="btn">عرض التفاصيل</a>
+                </div>
+            </div>
+            
+            <div class="portfolio-item">
+                <img src="https://via.placeholder.com/600x400" alt="مشروع 2" class="portfolio-img">
+                <div class="portfolio-overlay">
+                    <h3>تطبيق تعليمي</h3>
+                    <p>تطبيق جوال لمنصة تعليمية</p>
+                    <a href="#" class="btn">عرض التفاصيل</a>
+                </div>
+            </div>
+            
+            <div class="portfolio-item">
+                <img src="https://via.placeholder.com/600x400" alt="مشروع 3" class="portfolio-img">
+                <div class="portfolio-overlay">
+                    <h3>هوية بصرية</h3>
+                    <p>تصميم هوية بصرية لشركة ناشئة</p>
+                    <a href="#" class="btn">عرض التفاصيل</a>
+                </div>
+            </div>
+            
+            <div class="portfolio-item">
+                <img src="https://via.placeholder.com/600x400" alt="مشروع 4" class="portfolio-img">
+                <div class="portfolio-overlay">
+                    <h3>نظام إدارة</h3>
+                    <p>نظام إدارة محتوى مخصص</p>
+                    <a href="#" class="btn">عرض التفاصيل</a>
+                </div>
+            </div>
+            
+            <div class="portfolio-item">
+                <img src="https://via.placeholder.com/600x400" alt="مشروع 5" class="portfolio-img">
+                <div class="portfolio-overlay">
+                    <h3>حملة تسويقية</h3>
+                    <p>حملة تسويق رقمي متكاملة</p>
+                    <a href="#" class="btn">عرض التفاصيل</a>
+                </div>
+            </div>
+            
+            <div class="portfolio-item">
+                <img src="https://via.placeholder.com/600x400" alt="مشروع 6" class="portfolio-img">
+                <div class="portfolio-overlay">
+                    <h3>تطبيق ريادة أعمال</h3>
+                    <p>حلول تقنية لرواد الأعمال</p>
+                    <a href="#" class="btn">عرض التفاصيل</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الفريق -->
+    <section class="section team" id="team">
+        <div class="section-title">
+            <h2>فريقنا</h2>
+            <p>تعرف على الفريق المبدع الذي يعمل وراء الكواليس لتحقيق رؤيتك</p>
+        </div>
+        
+        <div class="team-grid">
+            <div class="team-member">
+                <img src="https://via.placeholder.com/400x400" alt="عضو الفريق 1" class="team-img">
+                <div class="team-info">
+                    <h3>أحمد محمد</h3>
+                    <p>مدير تقني</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-member">
+                <img src="https://via.placeholder.com/400x400" alt="عضو الفريق 2" class="team-img">
+                <div class="team-info">
+                    <h3>سارة عبدالله</h3>
+                    <p>مصممة جرافيك</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-behance"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-member">
+                <img src="https://via.placeholder.com/400x400" alt="عضو الفريق 3" class="team-img">
+                <div class="team-info">
+                    <h3>خالد علي</h3>
+                    <p>مطور ويب</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-stack-overflow"></i></a>
+                        <a href="#"><i class="fab fa-gitlab"></i></a>
+                        <a href="#"><i class="fab fa-medium"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="team-member">
+                <img src="https://via.placeholder.com/400x400" alt="عضو الفريق 4" class="team-img">
+                <div class="team-info">
+                    <h3>لمى سالم</h3>
+                    <p>خبيرة تسويق</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الاتصال -->
+    <section class="section contact" id="contact">
+        <div class="section-title">
+            <h2>اتصل بنا</h2>
+            <p>نحن هنا للإجابة على جميع استفساراتك ومساعدتك في بدء مشروعك القادم</p>
+        </div>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>تواصل معنا</h3>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div>
+                            <h4>البريد الإلكتروني</h4>
+                            <p>info@mysite.com</p>
+                        </div>
+                        <i class="fas fa-envelope contact-icon"></i>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div>
+                            <h4>الهاتف</h4>
+                            <p>+966 12 345 6789</p>
+                        </div>
+                        <i class="fas fa-phone contact-icon"></i>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div>
+                            <h4>العنوان</h4>
+                            <p>شارع الملك فهد، الرياض، المملكة العربية السعودية</p>
+                        </div>
+                        <i class="fas fa-map-marker-alt contact-icon"></i>
+                    </div>
+                </div>
+                
+                <h3>ساعات العمل</h3>
+                <p>الأحد - الخميس: 8 صباحًا - 5 مساءً</p>
+                <p>الجمعة - السبت: مغلق</p>
+            </div>
+            
+            <div class="contact-form">
+                <form>
+                    <input type="text" placeholder="الاسم الكامل" required>
+                    <input type="email" placeholder="البريد الإلكتروني" required>
+                    <input type="text" placeholder="الموضوع">
+                    <textarea placeholder="رسالتك" required></textarea>
+                    <button type="submit" class="btn">إرسال الرسالة</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- التذييل -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>عن الشركة</h3>
+                <p>نحن شركة رائدة في مجال الحلول الرقمية، نقدم خدمات متكاملة في تصميم وتطوير المواقع الإلكترونية والتطبيقات والتسويق الرقمي.</p>
+                <div class="social-links" style="justify-content: flex-start; margin-top: 1rem;">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h3>روابط سريعة</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#services">الخدمات</a></li>
+                    <li><a href="#portfolio">المشاريع</a></li>
+                    <li><a href="#team">الفريق</a></li>
+                    <li><a href="#contact">اتصل بنا</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>الخدمات</h3>
+                <ul class="footer-links">
+                    <li><a href="#">تطوير الويب</a></li>
+                    <li><a href="#">تطبيقات الجوال</a></li>
+                    <li><a href="#">التسويق الرقمي</a></li>
+                    <li><a href="#">تصميم جرافيك</a></li>
+                    <li><a href="#">استضافة المواقع</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>النشرة البريدية</h3>
+                <p>اشترك في نشرتنا البريدية لتصلك آخر الأخبار والعروض.</p>
+                <form style="margin-top: 1rem;">
+                    <input type="email" placeholder="بريدك الإلكتروني" style="width: 100%; padding: 0.8rem; border: none; border-radius: 5px; margin-bottom: 0.5rem;">
+                    <button type="submit" class="btn" style="width: 100%;">اشترك الآن</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 موقعي. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script>
+        // القائمة المتنقلة
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // إغلاق القائمة عند النقر على رابط
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // تأثير التمرير السلس
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // تأثير التمرير للشريط العلوي
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            header.classList.toggle('sticky', window.scrollY > 0);
+        });
+    </script>
+</body>
+</html>
